@@ -1,83 +1,53 @@
 //1
-const ex1 = () => {
-    let a = 5, b = 10;
-
-    [a, b] = [b, a];
-
-    console.log(a); // 10
-    console.log(b); // 5
+const sumEveryOther = (...args) => {
+    return args.reduce((acc, num) => {
+        return acc += num;
+    }, 0);
 };
-//ex1();
+//console.log(sumEveryOther(6, 8, 2, 3, 1)); //20
+//console.log(sumEveryOther(11, 3, 12)); //26
 
 //2
-const segundoElemento = ([, secondElement]) => {
-    return secondElement;
+const addOnlyNums = (...args) => {
+    return sumEveryOther(...args.filter((num) => !isNaN(num)));
 };
-//console.log(segundoElemento([1, 2, 3, 4]));
+//console.log(addOnlyNums(1, "perro", 2, 4)); //7
 
 //3
-const ex3 = () => {
-    const persona = { edad: 25 };
-
-    const { nombre = 'Desconocido' } = persona;
-
-    console.log(nombre); // 'Desconocido'
+const countTheArgs = (...args) => {
+    return args.length;
 };
-//ex3();
+//console.log(countTheArgs("gato", "perro")); //2
+//console.log(countTheArgs("gato", "perro", "pollo", "oso")); //4
 
 //4
-const sumarTres = ([a, b, c,]) => {
-    return a + b + c;
+const array1 = [1, 2, 3];
+const array2 = [4, 5, 6];
+const combineTwoArrays = (a1, a2) => {
+    return [...a1, ...a2];
 };
-//console.log(sumarTres([4, 5, 6, 7])); // 15
+//console.log(combineTwoArrays(array1, array2)); // [1, 2, 3, 4, 5, 6]
 
 //5
-const sinPrimero = ([a, ...elements]) => {
-    return [elements]
+const onlyUniques = (...args) => {
+    return [...new Set(args)];
 };
-//console.log(sinPrimero([1, 2, 3, 4])); // [2, 3, 4]
+//console.log(onlyUniques("gato", "pollo", "cerdo", "cerdo")); //['gato', 'pollo', 'cerdo']
+//console.log(onlyUniques(1, 1, 2, 2, 3, 6, 7, 8)); //[1, 2, 3, 6, 7, 8]
 
 //6
-const ex6 = () => {
-    const persona = {
-        nombre: "Roberto",
-        direccion: {
-            ciudad: "Quito",
-            pais: "Ecuador",
-        },
-    };
-
-    const {nombre, direccion: {pais}} = persona;
-
-    console.log(nombre); // 'Roberto'
-    console.log(pais); // 'Ecuador'
+const combineAllArrays = (...args) => {
+    return args.flat();
 };
-//ex6();
+//console.log(combineAllArrays([3, 6, 7, 8], [2, 7, 3, 1])); // [3, 6, 7, 8, 2, 7, 3, 1]
+//console.log(combineAllArrays([2, 7, 3, 1], [2, 7, 4, 12], [2, 44, 22, 7, 3, 1])); // [2, 7, 3, 1, 2, 7, 4, 12, 2, 44, 22, 7, 3, 1]
 
 //7
-const ex7 = () => {
-    const persona = { nombre: "Ana", edad: 28 };
-    const detalles = { profesion: "Ingeniera", pais: "España" };
-
-    const {nombre, edad} = persona;
-    const {profesion, pais} = detalles;
-
-    console.log({ nombre, edad, profesion, pais });
-    // { nombre: 'Ana', edad: 28, profesion: 'Ingeniera', pais: 'España' }
+const sumAndSquare = (...args) => {
+    return args.reduce((acc, num) => {
+        return acc += num * num;
+    }, 0);
 };
-//ex7();
-
-//8
-const config = { host: "localhost", port: 8080 };
-const conectar = ({host, port}) => {
-    return `Conectando a ${host} en el puerto ${port}`;
-};
-//console.log(conectar(config)); // Conectando a localhost en el puerto 8080
-
-//9
-const ex9 = () => {
-    const personas = [{ nombre: "Juan" }, { nombre: "Pedro" }];
-    const [, {nombre}] = personas;
-    console.log(nombre); // 'Pedro'
-};
-//ex9();
+//console.log(sumAndSquare(1, 2, 3)); // 1^2 + 2^2 + 3^2 = 14
+//console.log(sumAndSquare(4, 5)); // 4^2 + 5^2 = 41
+//console.log(sumAndSquare(1, 2, 3, 4)); // 1^2 + 2^2 + 3^2 + 4^2 = 30
